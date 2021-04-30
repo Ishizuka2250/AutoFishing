@@ -14,7 +14,7 @@ import ctypes
 
 WindowList = []
 AvoidLogout = 60
-ScriptEndTime = datetime.datetime.strptime("2021/04/03 20:23", "%Y/%m/%d %H:%M")
+ScriptEndTime = datetime.datetime.strptime("2021/04/04 16:37", "%Y/%m/%d %H:%M")
 
 def main():
     print("Info:This script will start 5sec later.")
@@ -28,11 +28,11 @@ def main():
             hitCount += 1
             print(f"Info:{hitCount}Hit!")
             fishingRodAction()
-            time.sleep(1.5)
+            time.sleep(2.0)
             fishingRodAction()
-            time.sleep(2)
+            time.sleep(2.0)
         else:
-            time.sleep(0.5)
+            time.sleep(0.4)
         
         if aboidLogoutCounter == AvoidLogout:
             avoidAFKLogout()
@@ -66,7 +66,7 @@ def keyDown(Key, pressTime):
     pydirectinput.keyUp(Key)
 
 def isHitting():
-    hsvImage = cv2.cvtColor(getWindowImage("Minecraft.*"), cv2.COLOR_BGR2HSV_FULL)
+    hsvImage = cv2.cvtColor(getMinecraftWindowImage(), cv2.COLOR_BGR2HSV_FULL)
     
     # When fishing outdoors
     lower = (170, 0, 20)
@@ -94,8 +94,8 @@ def isHitting():
     else:
         return False
 
-def getWindowImage(SearchWindowPattern):
-    windowImage = centerClop(ImageGrab.grab(windowRect(SearchWindowPattern)), 200, 452)
+def getMinecraftWindowImage():
+    windowImage = centerClop(ImageGrab.grab(windowRect("Minecraft.*")), 200, 452)
     #windowImage = centerClop(Image.open("Minecraft_Fishing_Sample11.png"), 200, 452)
     return np.array(windowImage)
 
