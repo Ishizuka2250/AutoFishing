@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 from PIL import ImageGrab
 from PIL import Image
 import numpy as np
@@ -19,7 +20,7 @@ ScriptEndTime = datetime.datetime.strptime("2021/04/04 16:37", "%Y/%m/%d %H:%M")
 def main():
     print("Info:This script will start 5sec later.")
     time.sleep(5)
-    
+
     hitCount = 0
     aboidLogoutCounter = 1
     print("Info:Script start.")
@@ -33,14 +34,14 @@ def main():
             time.sleep(2.0)
         else:
             time.sleep(0.4)
-        
+
         if aboidLogoutCounter == AvoidLogout:
             avoidAFKLogout()
             aboidLogoutCounter = 0
-        
+
         #if ScriptEndTime < datetime.datetime.now():
         #    connectionClose()
-        
+
         aboidLogoutCounter += 1
 
 def connectionClose():
@@ -67,7 +68,7 @@ def keyDown(Key, pressTime):
 
 def isHitting():
     hsvImage = cv2.cvtColor(getMinecraftWindowImage(), cv2.COLOR_BGR2HSV_FULL)
-    
+
     # When fishing outdoors
     lower = (170, 0, 20)
     upper = (180, 255, 255)
@@ -107,34 +108,34 @@ def centerClop(PillowImage, width, height):
     else:
         clopX1 = (imageWidth / 2) - (width / 2)
         clopX2 = (imageWidth / 2) + (width / 2)
-    
+
     if (height == 0):
         clopY1 = 0
         clopY2 = imageHeight
     else:
         clopY1 = (imageHeight / 2) - (height / 2)
         clopY2 = (imageHeight / 2) + (height / 2)
-    
+
     if (clopX1 < 0):
         clopX1 = 0
     elif (clopX1 > imageWidth):
         cloxX1 = imageWidth
-    
+
     if (clopX2 < 0):
         clopX2 = 0
     elif (clopX2 > imageWidth):
         clopX2 = imageWidth
-    
+
     if (clopY1 < 0):
         clopY1 = 0
     elif (clopY1 > imageHeight):
         clopY1 = imageHeight
-    
+
     if (clopY2 < 0):
         clopY2 = 0
     elif (clopY2 > imageHeight):
         clopY2 = imageHeight
-    
+
     #print(str(clopX1) + " " + str(clopY1) + " " + str(clopX2) + " " + str(clopY2))
     return PillowImage.crop((clopX1,clopY1,clopX2,clopY2))
 
